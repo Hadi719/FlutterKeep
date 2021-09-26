@@ -5,7 +5,7 @@ class ScreenTransition extends PageRouteBuilder {
   ScreenTransition(this.page)
       : super(
           pageBuilder: (context, animation, anotherAnimation) => page,
-          transitionDuration: Duration(microseconds: 2000),
+          transitionDuration: const Duration(microseconds: 2000),
           transitionsBuilder: (context, animation, anotherAnimation, child) {
             animation = CurvedAnimation(
               parent: animation,

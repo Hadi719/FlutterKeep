@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
 import '../models/note_model.dart';
+import '../screens/detail_screen.dart';
 import '../screens/edit_screen.dart';
+import '../widgets/note_card_widget.dart';
 
 class OldHomeScreen extends StatefulWidget {
   const OldHomeScreen({Key? key}) : super(key: key);
@@ -77,30 +80,27 @@ class _OldHomeScreenState extends State<OldHomeScreen> {
   }
 
   Widget buildNotes() {
-    return Container();
+    return StaggeredGridView.countBuilder(
+      padding: const EdgeInsets.all(8),
+      itemCount: notes.length,
+      crossAxisCount: 4,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+      itemBuilder: (context, index) {
+        final note = notes[index];
 
-    /// Need this Package "flutter_staggered_grid_view"
-    //   StaggeredGridView.countBuilder(
-    //   padding: EdgeInsets.all(8),
-    //   itemCount: notes.length,
-    //   crossAxisCount: 4,
-    //   mainAxisSpacing: 4,
-    //   crossAxisSpacing: 4,
-    //   staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-    //   itemBuilder: (context, index) {
-    //     final note = notes[index];
-    //
-    //     return GestureDetector(
-    //       onTap: () async {
-    //         await Navigator.of(context).push(MaterialPageRoute(
-    //           builder: (context) => DetailScreen(noteId: note.id!),
-    //         ));
-    //
-    //         refreshNotes();
-    //       },
-    //       child: NoteCardWidget(note: note, index: index),
-    //     );
-    //   },
-    // );
+        return GestureDetector(
+          onTap: () async {
+            await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => DetailScreen(noteId: note.id!),
+            ));
+
+            refreshNotes();
+          },
+          child: NoteCardWidget(note: note, index: index),
+        );
+      },
+    );
   }
 }
