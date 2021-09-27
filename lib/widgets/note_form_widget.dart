@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class NoteFormWidget extends StatelessWidget {
   final String? title;
-  final String? content;
+  final String? noteText;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedContent;
 
   const NoteFormWidget({
     Key? key,
     this.title = '',
-    this.content = '',
+    this.noteText = '',
     required this.onChangedTitle,
     required this.onChangedContent,
   }) : super(key: key);
@@ -48,7 +48,7 @@ class NoteFormWidget extends StatelessWidget {
 
   Widget buildContent() => TextFormField(
         maxLines: 5,
-        initialValue: content,
+        initialValue: noteText,
         style: const TextStyle(
           fontSize: 18,
           color: Colors.black,
@@ -57,7 +57,7 @@ class NoteFormWidget extends StatelessWidget {
           border: InputBorder.none,
           hintText: 'Type something...',
         ),
-        validator: (content) => content != null && content.isEmpty
+        validator: (noteText) => noteText != null && noteText.isEmpty
             ? 'The content cannot be empty'
             : null,
         onChanged: onChangedContent,

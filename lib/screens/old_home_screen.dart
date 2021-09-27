@@ -93,7 +93,7 @@ class _OldHomeScreenState extends State<OldHomeScreen> {
         return GestureDetector(
           onTap: () async {
             await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailScreen(noteId: note.id!),
+              builder: (context) => DetailScreen(noteId: note.noteId!),
             ));
 
             refreshNotes();

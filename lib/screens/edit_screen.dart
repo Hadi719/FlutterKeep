@@ -6,11 +6,9 @@ import '../widgets/note_form_widget.dart';
 
 class EditScreen extends StatefulWidget {
   final Note? note;
+  final Content? content;
 
-  const EditScreen({
-    Key? key,
-    this.note,
-  }) : super(key: key);
+  const EditScreen({Key? key, this.note, this.content}) : super(key: key);
   @override
   _EditScreenState createState() => _EditScreenState();
 }
@@ -18,14 +16,15 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   final _formKey = GlobalKey<FormState>();
   late String title;
-  late String content;
+  late String noteText;
+  late int getNoteID;
 
   @override
   void initState() {
     super.initState();
 
     title = widget.note?.title ?? '';
-    content = widget.note?.content ?? '';
+    noteText = widget.content?.noteText ?? '';
   }
 
   @override
@@ -37,31 +36,35 @@ class _EditScreenState extends State<EditScreen> {
           key: _formKey,
           child: NoteFormWidget(
             title: title,
-            content: content,
+            noteText: noteText,
             onChangedTitle: (title) => setState(() => this.title = title),
-            onChangedContent: (content) =>
-                setState(() => this.content = content),
+            onChangedContent: (newNoteText) =>
+                setState(() => noteText = newNoteText),
           ),
         ),
       );
 
   Widget buildButton() {
-    final isFormValid = title.isNotEmpty && content.isNotEmpty;
+    final isFormValid = title.isNotEmpty && noteText.isNotEmpty;
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           onPrimary: Colors.white,
           primary: isFormValid ? null : Colors.grey.shade700,
         ),
-        onPressed: addOrUpdateNote,
-        child: Text('Save'),
+        onPressed: () async {
+          await addOrUpdateNote();
+          await addOrUpdateContent();
+          Navigator.of(context).pop();
+        },
+        child: const Text('Save'),
       ),
     );
   }
 
-  void addOrUpdateNote() async {
+  Future addOrUpdateNote() async {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
@@ -72,27 +75,54 @@ class _EditScreenState extends State<EditScreen> {
       } else {
         await addNote();
       }
+    }
+  }
 
-      Navigator.of(context).pop();
+  Future addOrUpdateContent() async {
+    final isUpdating = widget.content != null;
+    if (isUpdating) {
+      await updateContent();
+    } else {
+      await addContent();
     }
   }
 
   Future updateNote() async {
-    final note = widget.note!.copy(
+    final note = widget.note!.add(
       title: title,
-      content: content,
     );
 
     await NotesDatabase.instance.updateNote(note);
   }
 
+  Future updateContent() async {
+    final content = widget.content!.add(
+      noteText: noteText,
+    );
+
+    await NotesDatabase.instance.updateContent(content);
+  }
+
   Future addNote() async {
     final note = Note(
       title: title,
-      content: content,
       createdTime: DateTime.now(),
     );
 
-    await NotesDatabase.instance.addNote(note);
+    getNoteID = await NotesDatabase.instance.addNote(note);
+    //TODO Print call getNoteID
+    print('Note ID: ' + getNoteID.toString());
+  }
+
+  Future addContent() async {
+    final content = Content(
+      noteText: noteText,
+      contentNoteId: getNoteID,
+      //TODO: adding CheckBox
+      checkBox: false,
+      isDone: false,
+    );
+
+    await NotesDatabase.instance.addContent(content);
   }
 }

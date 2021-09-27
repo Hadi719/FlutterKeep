@@ -1,54 +1,130 @@
-final String tableName = 'notes';
+const String notesTableName = 'notes';
+const String contentsTableName = 'contents';
 
 class NoteFields {
-  static final List<String> values = [
-    /// Add all fields
-    id, title, content, time
+  /// NOTES Table Columns.
+  static final List<String> notesTableColumns = [
+    noteId,
+    title,
+    time,
   ];
 
-  static final id = '_id';
-  static final title = 'title';
-  static final content = 'content';
-  static final time = 'time';
+  /// CONTENTS Table Columns.
+  static final List<String> contentsTableColumns = [
+    contentId,
+    contentNoteId,
+    noteText,
+    checkBox,
+    isDone,
+  ];
+
+  /// "noteId" Column in "notes" Table.
+  static const noteId = 'noteId';
+
+  /// "title" Column in "notes" Table.
+  static const title = 'title';
+
+  /// "time" Column in "notes" Table.
+  static const time = 'time';
+
+  /// "contentId" Column in "contents" Table.
+  static const contentId = 'contentId';
+
+  /// "contentNoteId" Column in "contents" Table.
+  static const contentNoteId = 'contentNoteId';
+
+  /// "noteText" Column in "contents" Table.
+  static const noteText = 'noteText';
+
+  /// "checkBox" Column in "contents" Table.
+  static const checkBox = 'checked';
+
+  /// "isDone" Column in "contents" Table.
+  static const isDone = 'isDone';
 }
 
+/// Note Model.
 class Note {
-  final int? id;
+  final int? noteId;
   final String title;
-  final String content;
   final DateTime createdTime;
 
   const Note({
-    this.id,
+    this.noteId,
     required this.title,
-    required this.content,
     required this.createdTime,
   });
-  Note copy({
-    int? id,
+
+  Note add({
+    int? noteId,
     String? title,
-    String? content,
     DateTime? createdTime,
   }) {
     return Note(
-      id: id ?? this.id,
+      noteId: noteId ?? this.noteId,
       title: title ?? this.title,
-      content: content ?? this.content,
       createdTime: createdTime ?? this.createdTime,
     );
   }
 
   static Note fromJson(Map<String, Object?> json) => Note(
-        id: json[NoteFields.id] as int?,
+        noteId: json[NoteFields.noteId] as int?,
         title: json[NoteFields.title] as String,
-        content: json[NoteFields.content] as String,
         createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
   Map<String, Object?> toJson() => {
-        NoteFields.id: id,
+        NoteFields.noteId: noteId,
         NoteFields.title: title,
-        NoteFields.content: content,
         NoteFields.time: createdTime.toIso8601String(),
+      };
+}
+
+/// Content Model.
+class Content {
+  final int? contentId;
+  final int? contentNoteId;
+  final String noteText;
+  final bool checkBox;
+  final bool isDone;
+
+  const Content({
+    this.contentId,
+    required this.contentNoteId,
+    required this.noteText,
+    required this.checkBox,
+    required this.isDone,
+  });
+
+  Content add({
+    int? contentId,
+    int? contentNoteId,
+    String? noteText,
+    bool? checkBox,
+    bool? isDone,
+  }) {
+    return Content(
+      contentId: contentId ?? this.contentId,
+      contentNoteId: contentNoteId ?? this.contentNoteId,
+      noteText: noteText ?? this.noteText,
+      checkBox: checkBox ?? this.checkBox,
+      isDone: isDone ?? this.isDone,
+    );
+  }
+
+  static Content fromJson(Map<String, Object?> json) => Content(
+        contentId: json[NoteFields.contentId] as int?,
+        contentNoteId: json[NoteFields.contentNoteId] as int?,
+        noteText: json[NoteFields.noteText] as String,
+        checkBox: json[NoteFields.checkBox] == 1,
+        isDone: json[NoteFields.isDone] == 1,
+      );
+
+  Map<String, Object?> toJson() => {
+        NoteFields.contentId: contentId,
+        NoteFields.contentNoteId: contentNoteId,
+        NoteFields.noteText: noteText,
+        NoteFields.checkBox: checkBox == true ? 1 : 0,
+        NoteFields.isDone: isDone == true ? 1 : 0,
       };
 }

@@ -19,6 +19,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late Note note;
+  late Content content;
   bool isLoading = false;
 
   @override
@@ -31,7 +32,13 @@ class _DetailScreenState extends State<DetailScreen> {
   Future refreshNote() async {
     setState(() => isLoading = true);
 
-    this.note = await NotesDatabase.instance.readNote(widget.noteId);
+    note = await NotesDatabase.instance.readNote(widget.noteId);
+    //TODO print call: IDs in Detail Screen
+    print('Note ID in Detail Screen: ' + note.noteId.toString());
+    content = await NotesDatabase.instance.readContent(widget.noteId);
+    print('Content ID in Detail Screen: ' + content.contentId.toString());
+    print(
+        'Content NoteID in Detail Screen: ' + content.contentNoteId.toString());
 
     setState(() => isLoading = false);
   }
@@ -63,7 +70,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      note.content,
+                      content.noteText,
                       style: const TextStyle(color: Colors.black, fontSize: 18),
                     )
                   ],
@@ -72,12 +79,12 @@ class _DetailScreenState extends State<DetailScreen> {
       );
 
   Widget editButton() => IconButton(
-      icon: const Icon(Icons.edit_outlined),
+      icon: const Icon(Icons.edit),
       onPressed: () async {
         if (isLoading) return;
 
         await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => EditScreen(note: note),
+          builder: (context) => EditScreen(note: note, content: content),
         ));
 
         refreshNote();

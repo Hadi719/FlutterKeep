@@ -19,26 +19,43 @@ class NotesDatabase {
 
   Future<Database> _initDatabase(String filepath) async {
     final dbPath = await getDatabasesPath();
+    //TODO print call database location
+    print('db location: ' + dbPath);
     final path = join(dbPath, filepath);
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path,
+        version: 1, onCreate: _createDB, onConfigure: _onConfigure);
   }
 
   Future _createDB(Database db, int version) async {
-    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final textType = 'TEXT NOT NULL';
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    const textType = 'TEXT NOT NULL';
+    const intType = 'INTEGER NOT NULL';
 
     await db.execute('''
-CREATE TABLE $tableName ( 
-  ${NoteFields.id} $idType,
+CREATE TABLE $notesTableName ( 
+  ${NoteFields.noteId} $idType,
   ${NoteFields.title} $textType,
-  ${NoteFields.content} $textType,
   ${NoteFields.time} $textType
   )
 ''');
+    await db.execute('''
+    CREATE TABLE $contentsTableName ( 
+    ${NoteFields.contentId} $idType,
+    ${NoteFields.contentNoteId} $intType,
+    ${NoteFields.noteText} $textType,
+    ${NoteFields.checkBox} $intType,
+    ${NoteFields.isDone} $intType,
+    FOREIGN KEY(${NoteFields.contentNoteId}) REFERENCES $notesTableName(${NoteFields.noteId})
+    )
+    ''');
   }
 
-  Future<Note> addNote(Note note) async {
+  Future _onConfigure(Database db) async {
+    await db.execute("PRAGMA foreign_keys = ON");
+  }
+
+  Future addNote(Note note) async {
     final db = await instance.database;
 
     // final json = note.toJson();
@@ -49,24 +66,56 @@ CREATE TABLE $tableName (
     // final id = await db
     //     .rawInsert('INSERT INTO table_name ($columns) VALUES ($values)');
 
-    final id = await db.insert(tableName, note.toJson());
-    return note.copy(id: id);
+    final noteId = await db.insert(notesTableName, note.toJson());
+    //TODO print call Note ID from db.addNote
+    print('Note ID form addNote in database:' + noteId.toString());
+    final dbPath = await getDatabasesPath();
+    //TODO print call database location
+    print('db location: ' + dbPath);
+    note.add(noteId: noteId);
+    return noteId;
   }
 
-  Future<Note> readNote(int id) async {
+  Future<Content> addContent(Content content) async {
+    final db = await instance.database;
+
+    final contentId = await db.insert(contentsTableName, content.toJson());
+    //TODO print call: Content ID form db.addContent
+    print('Content ID from addContent in database ' + contentId.toString());
+    return content.add(contentId: contentId);
+  }
+
+  Future<Note> readNote(int noteId) async {
     final db = await instance.database;
 
     final maps = await db.query(
-      tableName,
-      columns: NoteFields.values,
-      where: '${NoteFields.id} = ?',
-      whereArgs: [id],
+      notesTableName,
+      columns: NoteFields.notesTableColumns,
+      where: '${NoteFields.noteId} = ?',
+      whereArgs: [noteId],
     );
 
     if (maps.isNotEmpty) {
       return Note.fromJson(maps.first);
     } else {
-      throw Exception('ID $id not found');
+      throw Exception('Note ID $noteId not found');
+    }
+  }
+
+  Future<Content> readContent(int contentNoteId) async {
+    final db = await instance.database;
+
+    final maps = await db.query(
+      contentsTableName,
+      columns: NoteFields.contentsTableColumns,
+      where: '${NoteFields.contentNoteId} = ?',
+      whereArgs: [contentNoteId],
+    );
+
+    if (maps.isNotEmpty) {
+      return Content.fromJson(maps.first);
+    } else {
+      throw Exception('Content with Note ID $contentNoteId not found');
     }
   }
 
@@ -77,29 +126,59 @@ CREATE TABLE $tableName (
     // final result =
     //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
 
-    final result = await db.query(tableName, orderBy: orderBy);
+    final result = await db.query(notesTableName, orderBy: orderBy);
 
     return result.map((json) => Note.fromJson(json)).toList();
+  }
+
+  Future<List<Content>> readAllContents() async {
+    final db = await instance.database;
+
+    final result = await db.query(contentsTableName);
+
+    return result.map((json) => Content.fromJson(json)).toList();
   }
 
   Future<int> updateNote(Note note) async {
     final db = await instance.database;
 
     return db.update(
-      tableName,
+      notesTableName,
       note.toJson(),
-      where: '${NoteFields.id} = ?',
-      whereArgs: [note.id],
+      where: '${NoteFields.noteId} = ?',
+      whereArgs: [note.noteId],
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<int> deleteNote(int id) async {
+  Future<int> updateContent(Content content) async {
+    final db = await instance.database;
+
+    return db.update(
+      contentsTableName,
+      content.toJson(),
+      where: '${NoteFields.contentNoteId} = ?',
+      whereArgs: [content.contentNoteId],
+    );
+  }
+
+  Future<int> deleteNote(int noteId) async {
     final db = await instance.database;
 
     return await db.delete(
-      tableName,
-      where: '${NoteFields.id} = ?',
-      whereArgs: [id],
+      notesTableName,
+      where: '${NoteFields.noteId} = ?',
+      whereArgs: [noteId],
+    );
+  }
+
+  Future<int> deleteContent(int contentNoteId) async {
+    final db = await instance.database;
+
+    return await db.delete(
+      contentsTableName,
+      where: '${NoteFields.contentNoteId} = ?',
+      whereArgs: [contentNoteId],
     );
   }
 

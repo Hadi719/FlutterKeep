@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late List<Note> notes;
+  late List<Content> contents;
   bool isLoading = false;
 
   /// SliverAppBar Settings
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Get all notes from database.
     notes = await NotesDatabase.instance.readAllNotes();
+    contents = await NotesDatabase.instance.readAllContents();
 
     setState(() => isLoading = false);
   }
@@ -52,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Loading the Notes.
     return isLoading
-        ? const CircularProgressIndicator()
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
         : Scaffold(
             body: SafeArea(
               child: CustomScrollView(
@@ -103,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return GestureDetector(
           onTap: () async {
             await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailScreen(noteId: note.id!),
+              builder: (context) => DetailScreen(noteId: note.noteId!),
             ));
 
             refreshNotes();
