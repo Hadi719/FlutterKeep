@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
+import '../models/content_models.dart';
 import '../models/note_model.dart';
-import '../screens/detail_screen.dart';
 import '../screens/edit_screen.dart';
 import '../widgets/note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  static const String routeId = 'home_screen';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -45,18 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Get all notes from database.
     notes = await NotesDatabase.instance.readAllNotes();
-    contents = await NotesDatabase.instance.readAllContents();
 
     setState(() => isLoading = false);
+  }
+
+  Widget loadingIndicator() {
+    refreshNotes();
+    return const Center(child: CircularProgressIndicator());
   }
 
   @override
   Widget build(BuildContext context) {
     // Loading the Notes.
     return isLoading
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
+        ? loadingIndicator()
         : Scaffold(
             body: SafeArea(
               child: CustomScrollView(
@@ -84,9 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.black,
               child: const Icon(Icons.add),
               onPressed: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const EditScreen()),
-                );
+                await Navigator.pushNamed(context, EditScreen.routeId);
 
                 refreshNotes();
               },
@@ -106,9 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return GestureDetector(
           onTap: () async {
-            await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailScreen(noteId: note.noteId!),
-            ));
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => EditScreen(noteId: note.noteId!),
+              ),
+            );
 
             refreshNotes();
           },
