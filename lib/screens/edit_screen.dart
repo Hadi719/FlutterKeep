@@ -76,34 +76,36 @@ class _EditScreenState extends State<EditScreen> {
             appBar: AppBar(
               actions: [buildAddButton(), buildSaveButton(), deleteButton()],
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                        maxLines: 1,
-                        initialValue: title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Title',
-                        ),
-                        validator: (title) => title != null && title.isEmpty
-                            ? 'The title cannot be empty'
-                            : null,
-                        onChanged: (newTitle) {
-                          setState(() => title = newTitle);
-                        }),
-                    Consumer<ContentsData>(
-                      builder: (context, contentsData, child) {
-                        contentsList = contentsData.getContentList;
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                      maxLines: 1,
+                      initialValue: title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Title',
+                      ),
+                      validator: (title) => title != null && title.isEmpty
+                          ? 'The title cannot be empty'
+                          : null,
+                      onChanged: (newTitle) {
+                        setState(() => title = newTitle);
+                      }),
+                ),
+                Consumer<ContentsData>(
+                  builder: (context, contentsData, child) {
+                    contentsList = contentsData.getContentList;
 
-                        return ListView.builder(
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: contentsData.getContentsListLength,
@@ -119,12 +121,12 @@ class _EditScreenState extends State<EditScreen> {
                               },
                             );
                           },
-                        );
-                      },
-                    ),
-                  ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ),
+              ],
             ),
           );
   }
