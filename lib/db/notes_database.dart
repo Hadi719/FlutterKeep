@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/content_models.dart';
 import '../models/note_model.dart';
 
 class NotesDatabase {
@@ -29,8 +30,8 @@ class NotesDatabase {
 
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const textType = 'TEXT NOT NULL';
-    const intType = 'INTEGER NOT NULL';
+    const textType = 'TEXT';
+    const intType = 'INTEGER';
 
     await db.execute('''
 CREATE TABLE $notesTableName ( 
@@ -41,12 +42,12 @@ CREATE TABLE $notesTableName (
 ''');
     await db.execute('''
     CREATE TABLE $contentsTableName ( 
-    ${NoteFields.contentId} $idType,
-    ${NoteFields.contentNoteId} $intType,
-    ${NoteFields.noteText} $textType,
-    ${NoteFields.checkBox} $intType,
-    ${NoteFields.isDone} $intType,
-    FOREIGN KEY(${NoteFields.contentNoteId}) REFERENCES $notesTableName(${NoteFields.noteId})
+    ${ContentFields.contentId} $idType,
+    ${ContentFields.contentNoteId} $intType,
+    ${ContentFields.noteText} $textType,
+    ${ContentFields.checkBox} $intType,
+    ${ContentFields.isDone} $intType,
+    FOREIGN KEY(${ContentFields.contentNoteId}) REFERENCES $notesTableName(${NoteFields.noteId})
     )
     ''');
   }
@@ -58,31 +59,19 @@ CREATE TABLE $notesTableName (
   Future addNote(Note note) async {
     final db = await instance.database;
 
-    // final json = note.toJson();
-    // final columns =
-    //     '${NoteFields.title}, ${NoteFields.description}, ${NoteFields.time}';
-    // final values =
-    //     '${json[NoteFields.title]}, ${json[NoteFields.description]}, ${json[NoteFields.time]}';
-    // final id = await db
-    //     .rawInsert('INSERT INTO table_name ($columns) VALUES ($values)');
-
-    final noteId = await db.insert(notesTableName, note.toJson());
-    //TODO print call Note ID from db.addNote
-    print('Note ID form addNote in database:' + noteId.toString());
-    final dbPath = await getDatabasesPath();
-    //TODO print call database location
-    print('db location: ' + dbPath);
-    note.add(noteId: noteId);
+    final noteId = await db.insert(
+      notesTableName,
+      note.toJson(),
+    );
     return noteId;
   }
 
-  Future<Content> addContent(Content content) async {
+  Future addContent(Content content) async {
     final db = await instance.database;
 
     final contentId = await db.insert(contentsTableName, content.toJson());
-    //TODO print call: Content ID form db.addContent
-    print('Content ID from addContent in database ' + contentId.toString());
-    return content.add(contentId: contentId);
+    content.add(contentId: contentId);
+    return contentId;
   }
 
   Future<Note> readNote(int noteId) async {
@@ -102,29 +91,30 @@ CREATE TABLE $notesTableName (
     }
   }
 
-  Future<Content> readContent(int contentNoteId) async {
+  Future<List<Content>> readContent(int contentNoteId) async {
     final db = await instance.database;
 
-    final maps = await db.query(
+    final result = await db.query(
       contentsTableName,
-      columns: NoteFields.contentsTableColumns,
-      where: '${NoteFields.contentNoteId} = ?',
+      columns: ContentFields.contentsTableColumns,
+      where: '${ContentFields.contentNoteId} = ?',
       whereArgs: [contentNoteId],
     );
 
-    if (maps.isNotEmpty) {
-      return Content.fromJson(maps.first);
+    if (result.isNotEmpty) {
+      List<Content> test =
+          result.map((json) => Content.fromJson(json)).toList();
+
+      return test;
     } else {
-      throw Exception('Content with Note ID $contentNoteId not found');
+      throw Exception('Contents with Note ID $contentNoteId not found');
     }
   }
 
   Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
 
-    final orderBy = '${NoteFields.time} ASC';
-    // final result =
-    //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
+    const orderBy = '${NoteFields.time} ASC';
 
     final result = await db.query(notesTableName, orderBy: orderBy);
 
@@ -147,7 +137,6 @@ CREATE TABLE $notesTableName (
       note.toJson(),
       where: '${NoteFields.noteId} = ?',
       whereArgs: [note.noteId],
-      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
@@ -157,7 +146,7 @@ CREATE TABLE $notesTableName (
     return db.update(
       contentsTableName,
       content.toJson(),
-      where: '${NoteFields.contentNoteId} = ?',
+      where: '${ContentFields.contentNoteId} = ?',
       whereArgs: [content.contentNoteId],
     );
   }
@@ -172,12 +161,12 @@ CREATE TABLE $notesTableName (
     );
   }
 
-  Future<int> deleteContent(int contentNoteId) async {
+  Future<int> deleteContents(int contentNoteId) async {
     final db = await instance.database;
 
     return await db.delete(
       contentsTableName,
-      where: '${NoteFields.contentNoteId} = ?',
+      where: '${ContentFields.contentNoteId} = ?',
       whereArgs: [contentNoteId],
     );
   }
