@@ -23,8 +23,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Note',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData().copyWith(
+      theme: ThemeData(
         primaryColor: Colors.deepPurple,
+        appBarTheme: const AppBarTheme(
+          color: Colors.deepPurple,
+        ),
       ),
       darkTheme: ThemeData.dark(),
       initialRoute: StarterScreen.routeName,

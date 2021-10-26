@@ -37,7 +37,10 @@ class _EditScreenState extends State<EditScreen> {
       setState(() {
         isLoading = true;
       });
+
       title = '';
+      Provider.of<ContentsData>(context, listen: false).addContent('');
+
       setState(() {
         isLoading = false;
         isNewNote = true;
