@@ -12,8 +12,8 @@ final _lightColors = [
   Colors.tealAccent.shade100
 ];
 
-class NoteCardWidget extends StatelessWidget {
-  const NoteCardWidget({
+class OldNoteCardWidget extends StatelessWidget {
+  const OldNoteCardWidget({
     Key? key,
     required this.note,
     required this.index,
