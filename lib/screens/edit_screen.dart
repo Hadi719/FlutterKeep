@@ -9,7 +9,7 @@ import '../models/note_model.dart';
 import '../widgets/content_widget.dart';
 
 class EditScreen extends StatefulWidget {
-  static const String routeId = 'edit_screen';
+  static const String routeName = 'edit_screen';
   final int? noteId;
 
   const EditScreen({
@@ -144,7 +144,7 @@ class _EditScreenState extends State<EditScreen> {
         onPressed: () async {
           await addOrUpdateNote();
           await addAllContents();
-          Navigator.pushNamed(context, HomeScreen.routeId);
+          Navigator.pushNamed(context, HomeScreen.routeName);
         },
         child: const Text('Save'),
       ),
@@ -173,7 +173,7 @@ class _EditScreenState extends State<EditScreen> {
         await NotesDatabase.instance.deleteContents(widget.noteId!);
         await NotesDatabase.instance.deleteNote(widget.noteId!);
         Provider.of<ContentsData>(context, listen: false).clearList;
-        Navigator.pushNamed(context, HomeScreen.routeId);
+        Navigator.pushNamed(context, HomeScreen.routeName);
       },
     );
   }

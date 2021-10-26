@@ -9,7 +9,7 @@ import '../widgets/note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static const String routeId = 'home_screen';
+  static const String routeName = 'home_screen';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.black,
               child: const Icon(Icons.add),
               onPressed: () async {
-                await Navigator.pushNamed(context, EditScreen.routeId);
+                await Navigator.pushNamed(context, EditScreen.routeName);
 
                 refreshNotes();
               },

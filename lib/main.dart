@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData().copyWith(
         primaryColor: Colors.blueAccent,
       ),
-      initialRoute: StarterScreen.routeId,
+      initialRoute: StarterScreen.routeName,
       routes: {
-        StarterScreen.routeId: (context) => const StarterScreen(),
-        HomeScreen.routeId: (context) => const HomeScreen(),
-        EditScreen.routeId: (context) => const EditScreen(),
+        StarterScreen.routeName: (context) => const StarterScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        EditScreen.routeName: (context) => const EditScreen(),
       },
     );
   }
