@@ -22,7 +22,6 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  final _formKey = GlobalKey<FormState>();
   late Note? note;
   late String title;
   late int getNoteID;
@@ -179,14 +178,10 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   Future addOrUpdateNote() async {
-    final isValid = _formKey.currentState!.validate();
-
-    if (isValid) {
-      if (isNewNote) {
-        await addNote();
-      } else {
-        await updateNote();
-      }
+    if (isNewNote) {
+      await addNote();
+    } else {
+      await updateNote();
     }
   }
 

@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
       title: 'My Note',
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
-        primaryColor: Colors.blueAccent,
+        primaryColor: Colors.deepPurple,
       ),
+      darkTheme: ThemeData.dark(),
       initialRoute: StarterScreen.routeName,
       routes: {
         StarterScreen.routeName: (context) => const StarterScreen(),
