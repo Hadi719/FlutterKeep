@@ -138,17 +138,17 @@ class _EditScreenState extends State<EditScreen> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-          primary: isFormValid ? null : Colors.grey.shade700,
-        ),
+      child: IconButton(
+        icon: const Icon(Icons.save),
+        tooltip: 'SAVE',
+        color: isFormValid ? Colors.white : Colors.grey,
         onPressed: () async {
-          await addOrUpdateNote();
-          await addAllContents();
-          Navigator.pushNamed(context, HomeScreen.routeName);
+          if (isFormValid) {
+            await addOrUpdateNote();
+            await addAllContents();
+            Navigator.pushNamed(context, HomeScreen.routeName);
+          }
         },
-        child: const Text('Save'),
       ),
     );
   }
@@ -156,14 +156,12 @@ class _EditScreenState extends State<EditScreen> {
   Widget buildAddButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-        ),
+      child: IconButton(
+        icon: const Icon(Icons.add),
+        tooltip: 'Add New Content',
         onPressed: () {
           Provider.of<ContentsData>(context, listen: false).addContent('');
         },
-        child: const Text('Add'),
       ),
     );
   }
@@ -171,6 +169,7 @@ class _EditScreenState extends State<EditScreen> {
   Widget deleteButton() {
     return IconButton(
       icon: const Icon(Icons.delete),
+      tooltip: 'DELETE',
       onPressed: () async {
         await NotesDatabase.instance.deleteContents(widget.noteId!);
         await NotesDatabase.instance.deleteNote(widget.noteId!);
