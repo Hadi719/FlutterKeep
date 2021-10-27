@@ -17,7 +17,6 @@ class ContentBuildWidget extends StatelessWidget {
       initialValue: noteText,
       style: const TextStyle(
         fontSize: 18,
-        color: Colors.black,
       ),
       decoration: const InputDecoration(
         border: InputBorder.none,

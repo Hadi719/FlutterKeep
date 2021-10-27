@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/widgets/note_card_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
@@ -29,6 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
             body: SafeArea(
               child: CustomScrollView(
                 slivers: [
+                  SliverAppBar(
+                    leading: IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(FontAwesomeIcons.bars),
+                    ),
+                  ),
                   SliverStaggeredGrid.countBuilder(
                     itemCount: notes.length,
                     crossAxisCount: 4,
