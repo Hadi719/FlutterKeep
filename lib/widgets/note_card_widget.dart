@@ -33,7 +33,6 @@ class NoteCardWidget extends StatelessWidget {
     final color = _lightColors[index % _lightColors.length];
     // final timeDate = DateFormat('d MMM, y').format(note.createdTime);
     // final timeHour = DateFormat('HH : mm').format(note.createdTime);
-    // final minHeight = getMinHeight(index);
     ScreenSizeConfig().init(context);
     return Card(
       color: color,
@@ -67,21 +66,5 @@ class NoteCardWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// To return different height for different widgets
-  double getMinHeight(int index) {
-    switch (index % 4) {
-      case 0:
-        return 100;
-      case 1:
-        return 150;
-      case 2:
-        return 150;
-      case 3:
-        return 100;
-      default:
-        return 100;
-    }
   }
 }
