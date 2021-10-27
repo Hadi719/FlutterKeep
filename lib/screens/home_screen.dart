@@ -35,13 +35,23 @@ class _HomeScreenState extends State<HomeScreen> {
             body: SafeArea(
               child: CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    pinned: _pinned,
-                    snap: _snap,
-                    floating: _floating,
-                    leading: IconButton(
-                      onPressed: () {},
-                      icon: const FaIcon(FontAwesomeIcons.bars),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 8.0),
+                    sliver: SliverAppBar(
+                      pinned: _pinned,
+                      snap: _snap,
+                      floating: _floating,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(40.0))),
+                      leading: IconButton(
+                        onPressed: () {},
+                        icon: const FaIcon(
+                          FontAwesomeIcons.bars,
+                          size: 20.0,
+                        ),
+                      ),
                     ),
                   ),
                   SliverStaggeredGrid.countBuilder(
