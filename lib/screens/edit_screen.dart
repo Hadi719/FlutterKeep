@@ -35,7 +35,11 @@ class _EditScreenState extends State<EditScreen> {
         ? const Center(child: CircularProgressIndicator())
         : Scaffold(
             appBar: AppBar(
-              actions: [buildAddButton(), buildSaveButton(), deleteButton()],
+              actions: [
+                buildAddButton(),
+                buildSaveButton(),
+                deleteButton(),
+              ],
             ),
             body: Column(
               children: [

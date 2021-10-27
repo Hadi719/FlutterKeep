@@ -21,6 +21,11 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<Content> allContents;
   bool isLoading = false;
 
+  /// SliverAppBar Settings
+  final bool _pinned = false;
+  final bool _snap = false;
+  final bool _floating = true;
+
   @override
   Widget build(BuildContext context) {
     // Loading the Notes.
@@ -31,6 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
+                    pinned: _pinned,
+                    snap: _snap,
+                    floating: _floating,
                     leading: IconButton(
                       onPressed: () {},
                       icon: const FaIcon(FontAwesomeIcons.bars),
