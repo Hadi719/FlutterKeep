@@ -12,17 +12,20 @@ class ContentBuildWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      maxLines: 5,
-      initialValue: noteText,
-      style: const TextStyle(
-        fontSize: 18,
+    return ListTile(
+      title: TextFormField(
+        initialValue: noteText,
+        maxLines: null,
+        keyboardType: TextInputType.multiline,
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Your Content...',
+        ),
+        onChanged: onChangedContent,
       ),
-      decoration: const InputDecoration(
-        border: InputBorder.none,
-        hintText: 'Your Content...',
-      ),
-      onChanged: onChangedContent,
     );
   }
 }
