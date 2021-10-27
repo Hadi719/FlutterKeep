@@ -104,38 +104,4 @@ class _HomeScreenState extends State<HomeScreen> {
       child: CircularProgressIndicator(),
     );
   }
-
-  Widget buildGridView() {
-    return CustomScrollView(
-      slivers: [
-        SliverList(
-          // gridDelegate:
-          //     const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              Note note = notes[index];
-              List<Content> contentsList = [];
-              for (var content in allContents) {
-                if (content.contentNoteId == note.noteId) {
-                  contentsList.add(content);
-                }
-              }
-              return GestureDetector(
-                onTap: () async {
-                  await Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => EditScreen(noteId: note.noteId!),
-                    ),
-                  );
-                },
-                child: NoteCardWidget(
-                    note: note, index: index, contentsList: contentsList),
-              );
-            },
-            childCount: notes.length,
-          ),
-        ),
-      ],
-    );
-  }
 }
