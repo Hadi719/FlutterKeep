@@ -60,6 +60,7 @@ class NoteCardWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 10.0),
             ContentViewWidget(contentsList: contentsList)
           ],
         ),
