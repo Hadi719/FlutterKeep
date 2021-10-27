@@ -37,11 +37,8 @@ class NoteCardWidget extends StatelessWidget {
     return Card(
       color: color,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
-          bottomLeft: Radius.circular(10.0),
-          bottomRight: Radius.circular(10.0),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
         ),
       ),
       child: Container(
