@@ -30,47 +30,6 @@ class _EditScreenState extends State<EditScreen> {
   bool isNewNote = false;
 
   @override
-  void initState() {
-    super.initState();
-    Provider.of<ContentsData>(context, listen: false).clearList;
-    if (widget.noteId == null) {
-      setState(() {
-        isLoading = true;
-      });
-
-      title = '';
-      Provider.of<ContentsData>(context, listen: false).addContent('');
-
-      setState(() {
-        isLoading = false;
-        isNewNote = true;
-      });
-    } else {
-      refreshNote();
-    }
-  }
-
-  Future refreshNote() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    note = await NotesDatabase.instance.readNote(widget.noteId!);
-    title = note!.title;
-    getNoteID = widget.noteId!;
-
-    contentsList = await NotesDatabase.instance.readContent(widget.noteId!);
-
-    int length = contentsList!.length;
-    for (int index = 0; index < length; index++) {
-      Provider.of<ContentsData>(context, listen: false)
-          .addContent(contentsList![index].noteText);
-    }
-
-    setState(() => isLoading = false);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return isLoading
         ? const Center(child: CircularProgressIndicator())
@@ -133,6 +92,28 @@ class _EditScreenState extends State<EditScreen> {
           );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ContentsData>(context, listen: false).clearList;
+    if (widget.noteId == null) {
+      Provider.of<ContentsData>(context, listen: false).addContent('');
+
+      setState(() {
+        isLoading = true;
+      });
+
+      title = '';
+
+      setState(() {
+        isLoading = false;
+        isNewNote = true;
+      });
+    } else {
+      refreshNote();
+    }
+  }
+
   Widget buildSaveButton() {
     final isFormValid = title.isNotEmpty && contentsList![0].noteText != '';
 
@@ -177,6 +158,26 @@ class _EditScreenState extends State<EditScreen> {
         Navigator.pushNamed(context, OldHomeScreen.routeName);
       },
     );
+  }
+
+  Future refreshNote() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    note = await NotesDatabase.instance.readNote(widget.noteId!);
+    title = note!.title;
+    getNoteID = widget.noteId!;
+
+    contentsList = await NotesDatabase.instance.readContent(widget.noteId!);
+
+    int length = contentsList!.length;
+    for (int index = 0; index < length; index++) {
+      Provider.of<ContentsData>(context, listen: false)
+          .addContent(contentsList![index].noteText);
+    }
+
+    setState(() => isLoading = false);
   }
 
   Future addOrUpdateNote() async {
