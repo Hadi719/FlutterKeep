@@ -45,8 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       floating: _floating,
                       toolbarHeight: ScreenSizeConfig.safeBlockVertical * 7,
                       shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(30.0))),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                      ),
                       leading: IconButton(
                         icon: const Icon(
                           Icons.menu,
