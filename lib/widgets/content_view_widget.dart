@@ -20,9 +20,6 @@ class ContentViewWidget extends StatelessWidget {
         Content content = contentsList[index];
         return Text(
           content.noteText,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
         );
       },
     );

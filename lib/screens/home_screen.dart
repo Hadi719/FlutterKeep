@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.purple,
               child: const Icon(Icons.add),
               onPressed: () async {
                 await Navigator.pushNamed(context, EditScreen.routeName);
