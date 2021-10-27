@@ -20,8 +20,6 @@ class NotesDatabase {
 
   Future<Database> _initDatabase(String filepath) async {
     final dbPath = await getDatabasesPath();
-    //TODO print call database location
-    print('db location: ' + dbPath);
     final path = join(dbPath, filepath);
 
     return await openDatabase(path,

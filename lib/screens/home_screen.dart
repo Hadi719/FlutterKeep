@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/widgets/note_card_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
@@ -19,10 +20,58 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<Content> allContents;
   bool isLoading = false;
 
-  /// SliverAppBar Settings
-  final bool _pinned = true;
-  final bool _snap = false;
-  final bool _floating = false;
+  @override
+  Widget build(BuildContext context) {
+    // Loading the Notes.
+    return isLoading
+        ? loadingIndicator()
+        : Scaffold(
+            body: SafeArea(
+              child: CustomScrollView(
+                slivers: [
+                  SliverStaggeredGrid.countBuilder(
+                    itemCount: notes.length,
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+                    itemBuilder: (context, index) {
+                      final note = notes[index];
+                      List<Content> contentsList = [];
+                      for (var content in allContents) {
+                        if (content.contentNoteId == note.noteId) {
+                          contentsList.add(content);
+                        }
+                      }
+                      return GestureDetector(
+                        onTap: () async {
+                          await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditScreen(noteId: note.noteId!),
+                            ),
+                          );
+                        },
+                        child: NoteCardWidget(
+                          note: note,
+                          index: index,
+                          contentsList: contentsList,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.purple,
+              child: const Icon(Icons.add),
+              onPressed: () async {
+                await Navigator.pushNamed(context, EditScreen.routeName);
+              },
+            ),
+          );
+  }
 
   @override
   void initState() {
@@ -57,55 +106,37 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // Loading the Notes.
-    return isLoading
-        ? loadingIndicator()
-        : Scaffold(
-            body: SafeArea(
-              child: buildGridView(context),
-            ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.purple,
-              child: const Icon(Icons.add),
-              onPressed: () async {
-                await Navigator.pushNamed(context, EditScreen.routeName);
-
-                refreshNotes();
-              },
-            ),
-          );
-  }
-
-  Widget buildGridView(context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-      child: GridView.builder(
-        itemCount: notes.length,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) {
-          Note note = notes[index];
-          List<Content> contentsList = [];
-          for (var content in allContents) {
-            if (content.contentNoteId == note.noteId) {
-              contentsList.add(content);
-            }
-          }
-          return GestureDetector(
-            onTap: () async {
-              await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => EditScreen(noteId: note.noteId!),
-                ),
+  Widget buildGridView() {
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+          // gridDelegate:
+          //     const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              Note note = notes[index];
+              List<Content> contentsList = [];
+              for (var content in allContents) {
+                if (content.contentNoteId == note.noteId) {
+                  contentsList.add(content);
+                }
+              }
+              return GestureDetector(
+                onTap: () async {
+                  await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => EditScreen(noteId: note.noteId!),
+                    ),
+                  );
+                },
+                child: NoteCardWidget(
+                    note: note, index: index, contentsList: contentsList),
               );
             },
-            child: NoteCardWidget(
-                note: note, index: index, contentsList: contentsList),
-          );
-        },
-      ),
+            childCount: notes.length,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../models/content_models.dart';
 
 class ContentsData extends ChangeNotifier {
-  List<Content> _contentList = [];
+  final List<Content> _contentList = [];
 
   List<Content> get getContentList => _contentList;
 

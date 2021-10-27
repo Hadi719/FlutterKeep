@@ -8,11 +8,11 @@ import '../src/Util/screen_size_config.dart';
 
 final _lightColors = [
   Colors.deepPurple,
-  Colors.green.shade800,
-  Colors.lightBlue.shade300,
-  Colors.orange.shade300,
-  Colors.pinkAccent.shade100,
-  Colors.tealAccent.shade100
+  Colors.green,
+  Colors.lightBlue,
+  Colors.orange,
+  Colors.pinkAccent,
+  Colors.tealAccent
 ];
 
 class NoteCardWidget extends StatelessWidget {
@@ -38,14 +38,17 @@ class NoteCardWidget extends StatelessWidget {
     return Card(
       color: color,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+          bottomLeft: Radius.circular(10.0),
+          bottomRight: Radius.circular(10.0),
         ),
       ),
       child: Container(
         width: ScreenSizeConfig.safeBlockHorizontal * 45,
         // constraints: BoxConstraints(minHeight: minHeight),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        padding: const EdgeInsets.fromLTRB(20, 20, 8, 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,10 +62,7 @@ class NoteCardWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            ContentViewWidget(contentsList: contentsList),
+            ContentViewWidget(contentsList: contentsList)
           ],
         ),
       ),

@@ -134,7 +134,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   Widget buildSaveButton() {
-    final isFormValid = title.isNotEmpty;
+    final isFormValid = title.isNotEmpty && contentsList![0].noteText != '';
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),

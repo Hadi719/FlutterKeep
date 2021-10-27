@@ -112,8 +112,6 @@ class _OldHomeScreenState extends State<OldHomeScreen> {
                 builder: (context) => EditScreen(noteId: note.noteId!),
               ),
             );
-
-            refreshNotes();
           },
           child: OldNoteCardWidget(note: note, index: index),
         );
