@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/models/contents_data.dart';
-import 'package:flutter_note/screens/home_screen.dart';
+import 'package:flutter_note/screens/old_home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
 import '../models/note_model.dart';
-import '../widgets/content_widget.dart';
+import '../widgets/content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
   static const String routeName = 'edit_screen';
@@ -113,7 +113,7 @@ class _EditScreenState extends State<EditScreen> {
                           itemCount: contentsData.getContentsListLength,
                           itemBuilder: (context, index) {
                             Content content = contentsList![index];
-                            return ContentWidget(
+                            return ContentBuildWidget(
                               noteText: content.noteText,
                               onChangedContent: (newNoteText) {
                                 return setState(() {
@@ -146,7 +146,7 @@ class _EditScreenState extends State<EditScreen> {
           if (isFormValid) {
             await addOrUpdateNote();
             await addAllContents();
-            Navigator.pushNamed(context, HomeScreen.routeName);
+            Navigator.pushNamed(context, OldHomeScreen.routeName);
           }
         },
       ),
@@ -174,7 +174,7 @@ class _EditScreenState extends State<EditScreen> {
         await NotesDatabase.instance.deleteContents(widget.noteId!);
         await NotesDatabase.instance.deleteNote(widget.noteId!);
         Provider.of<ContentsData>(context, listen: false).clearList;
-        Navigator.pushNamed(context, HomeScreen.routeName);
+        Navigator.pushNamed(context, OldHomeScreen.routeName);
       },
     );
   }

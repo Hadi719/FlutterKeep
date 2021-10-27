@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'My Note',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
         primaryColor: Colors.deepPurple,
         appBarTheme: const AppBarTheme(
           color: Colors.deepPurple,

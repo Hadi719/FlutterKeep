@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ContentWidget extends StatelessWidget {
+class ContentBuildWidget extends StatelessWidget {
   final String? noteText;
   final ValueChanged<String> onChangedContent;
 
-  const ContentWidget({
+  const ContentBuildWidget({
     Key? key,
     this.noteText,
     required this.onChangedContent,

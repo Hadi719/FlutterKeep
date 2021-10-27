@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../home_screen.dart';
+import '../old_home_screen.dart';
 import '../starter/screen_transition.dart';
 
 class StarterScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _StarterScreenState extends State<StarterScreen>
     Timer(const Duration(seconds: 4), () {
       setState(() {
         Navigator.pushReplacement(
-            context, ScreenTransition(const HomeScreen()));
+            context, ScreenTransition(const OldHomeScreen()));
       });
     });
   }
