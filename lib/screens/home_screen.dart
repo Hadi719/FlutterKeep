@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/widgets/note_card_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
 import '../models/note_model.dart';
 import '../screens/edit_screen.dart';
+import '../src/Util/screen_size_config.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSizeConfig().init(context);
     // Loading the Notes.
     return isLoading
         ? loadingIndicator()
@@ -42,15 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       pinned: _pinned,
                       snap: _snap,
                       floating: _floating,
+                      toolbarHeight: ScreenSizeConfig.safeBlockVertical * 7,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(40.0))),
+                              BorderRadius.all(Radius.circular(30.0))),
                       leading: IconButton(
-                        onPressed: () {},
-                        icon: const FaIcon(
-                          FontAwesomeIcons.bars,
-                          size: 20.0,
+                        icon: const Icon(
+                          Icons.menu,
                         ),
+                        iconSize: ScreenSizeConfig.safeBlockHorizontal * 7,
+                        onPressed: () {},
                       ),
                     ),
                   ),
