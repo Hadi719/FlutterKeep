@@ -77,12 +77,10 @@ class _EditScreenState extends State<EditScreen> {
                           itemCount: contentsData.getContentsListLength,
                           itemBuilder: (context, index) {
                             Content content = contentsList![index];
-                            print(
-                                'LV.Builder=> Text: ${contentsList![index].noteText} isDone: ${contentsList![index].isDone}');
                             return ContentBuildWidget(
                               noteText: content.noteText,
                               isCheckBox: isCheckBox,
-                              isDone: content.isDone!,
+                              isDone: content.isDone,
                               onChangeCheckBox: (bool? newValue) {
                                 setState(() {
                                   content.isDone = newValue;
@@ -189,8 +187,6 @@ class _EditScreenState extends State<EditScreen> {
     for (int index = 0; index < length; index++) {
       Provider.of<ContentsData>(context, listen: false).addContent(
           contentsList![index].noteText, contentsList![index].isDone);
-      print(
-          'ES.refresh=> Text: ${contentsList![index].noteText} isDone: ${contentsList![index].isDone}');
     }
 
     setState(() => isLoading = false);
