@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/models/contents_data.dart';
-import 'package:flutter_note/screens/old_home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
 import '../models/note_model.dart';
+import '../screens/home_screen.dart';
 import '../widgets/content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
@@ -26,7 +26,7 @@ class _EditScreenState extends State<EditScreen> {
   late String title;
   late int getNoteID;
   late List<Content>? contentsList;
-  bool isCheckBox = true;
+  late bool isCheckBox;
   bool isLoading = false;
   bool isNewNote = false;
 
@@ -77,11 +77,17 @@ class _EditScreenState extends State<EditScreen> {
                           itemCount: contentsData.getContentsListLength,
                           itemBuilder: (context, index) {
                             Content content = contentsList![index];
+                            print(
+                                'LV.Builder=> Text: ${contentsList![index].noteText} isDone: ${contentsList![index].isDone}');
                             return ContentBuildWidget(
                               noteText: content.noteText,
                               isCheckBox: isCheckBox,
+                              isDone: content.isDone!,
                               onChangeCheckBox: (bool? newValue) {
-                                content.isDone = newValue;
+                                setState(() {
+                                  content.isDone = newValue;
+                                  contentsData.updateContent(index, content);
+                                });
                               },
                               onChangedContent: (newNoteText) {
                                 return setState(() {
@@ -106,15 +112,11 @@ class _EditScreenState extends State<EditScreen> {
     super.initState();
     Provider.of<ContentsData>(context, listen: false).clearList;
     if (widget.noteId == null) {
-      setState(() {
-        isLoading = true;
-      });
-
       title = '';
-      Provider.of<ContentsData>(context, listen: false).addContent('');
+      isCheckBox = false;
+      Provider.of<ContentsData>(context, listen: false).addContent('', false);
 
       setState(() {
-        isLoading = false;
         isNewNote = true;
       });
     } else {
@@ -135,7 +137,7 @@ class _EditScreenState extends State<EditScreen> {
           if (isFormValid) {
             await addOrUpdateNote();
             await addAllContents();
-            Navigator.pushNamed(context, OldHomeScreen.routeName);
+            Navigator.pop(context);
           }
         },
       ),
@@ -149,7 +151,10 @@ class _EditScreenState extends State<EditScreen> {
         icon: const Icon(Icons.add),
         tooltip: 'Add New Content',
         onPressed: () {
-          Provider.of<ContentsData>(context, listen: false).addContent('');
+          // Provider.of<ContentsData>(context, listen: false).addContent('');
+          setState(() {
+            isCheckBox = !isCheckBox;
+          });
         },
       ),
     );
@@ -163,7 +168,7 @@ class _EditScreenState extends State<EditScreen> {
         await NotesDatabase.instance.deleteContents(widget.noteId!);
         await NotesDatabase.instance.deleteNote(widget.noteId!);
         Provider.of<ContentsData>(context, listen: false).clearList;
-        Navigator.pushNamed(context, OldHomeScreen.routeName);
+        Navigator.pushNamed(context, HomeScreen.routeName);
       },
     );
   }
@@ -182,8 +187,10 @@ class _EditScreenState extends State<EditScreen> {
 
     int length = contentsList!.length;
     for (int index = 0; index < length; index++) {
-      Provider.of<ContentsData>(context, listen: false)
-          .addContent(contentsList![index].noteText);
+      Provider.of<ContentsData>(context, listen: false).addContent(
+          contentsList![index].noteText, contentsList![index].isDone);
+      print(
+          'ES.refresh=> Text: ${contentsList![index].noteText} isDone: ${contentsList![index].isDone}');
     }
 
     setState(() => isLoading = false);
@@ -200,7 +207,8 @@ class _EditScreenState extends State<EditScreen> {
   Future addNote() async {
     final note = Note(
       title: title,
-      createdTime: DateTime.now(),
+      isCheckBox: isCheckBox,
+      time: DateTime.now(),
     );
 
     getNoteID = await NotesDatabase.instance.addNote(note);
@@ -209,6 +217,8 @@ class _EditScreenState extends State<EditScreen> {
   Future updateNote() async {
     note = note!.add(
       title: title,
+      isCheckBox: isCheckBox,
+      time: DateTime.now(),
     );
 
     await NotesDatabase.instance.updateNote(note!);
@@ -227,7 +237,7 @@ class _EditScreenState extends State<EditScreen> {
           .getContentList[index];
       newContent.contentNoteId = getNoteID;
 
-      ///Test if content TEXT isEmpty.
+      /// Test if content TEXT isEmpty.
       String _testText = newContent.noteText.replaceAll(' ', '');
       if (_testText != '') {
         await NotesDatabase.instance.addContent(newContent);

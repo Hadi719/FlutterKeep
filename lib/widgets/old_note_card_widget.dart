@@ -28,8 +28,8 @@ class OldNoteCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
     final color = _lightColors[index % _lightColors.length];
-    final timeDate = DateFormat('d MMM, y').format(note.createdTime);
-    final timeHour = DateFormat('HH : mm').format(note.createdTime);
+    final timeDate = DateFormat('d MMM, y').format(note.time);
+    final timeHour = DateFormat('HH : mm').format(note.time);
     final minHeight = getMinHeight(index);
     ScreenSizeConfig().init(context);
     return Stack(

@@ -20,8 +20,11 @@ class ContentsData extends ChangeNotifier {
   }
 
   /// Add content to ContentsData._contentList
-  void addContent(String noteText) {
-    final content = Content(noteText: noteText);
+  void addContent(String noteText, bool? isDone) {
+    final content = Content(
+      noteText: noteText,
+      isDone: isDone,
+    );
     _contentList.add(content);
     notifyListeners();
   }

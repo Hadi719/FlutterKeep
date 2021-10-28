@@ -33,7 +33,7 @@ class Content {
     this.contentId,
     this.contentNoteId,
     this.noteText = '',
-    this.isDone,
+    this.isDone = false,
   });
 
   Content add({
