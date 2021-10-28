@@ -26,6 +26,7 @@ class _EditScreenState extends State<EditScreen> {
   late String title;
   late int getNoteID;
   late List<Content>? contentsList;
+  bool isCheckBox = true;
   bool isLoading = false;
   bool isNewNote = false;
 
@@ -78,6 +79,10 @@ class _EditScreenState extends State<EditScreen> {
                             Content content = contentsList![index];
                             return ContentBuildWidget(
                               noteText: content.noteText,
+                              isCheckBox: isCheckBox,
+                              onChangeCheckBox: (bool? newValue) {
+                                content.isDone = newValue;
+                              },
                               onChangedContent: (newNoteText) {
                                 return setState(() {
                                   content.noteText = newNoteText;
@@ -169,8 +174,9 @@ class _EditScreenState extends State<EditScreen> {
     });
 
     note = await NotesDatabase.instance.readNote(widget.noteId!);
-    title = note!.title;
     getNoteID = widget.noteId!;
+    title = note!.title;
+    isCheckBox = note!.isCheckBox;
 
     contentsList = await NotesDatabase.instance.readContent(widget.noteId!);
 
