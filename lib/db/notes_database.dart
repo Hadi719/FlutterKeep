@@ -35,6 +35,7 @@ class NotesDatabase {
 CREATE TABLE $notesTableName ( 
   ${NoteFields.noteId} $idType,
   ${NoteFields.title} $textType,
+  ${NoteFields.isCheckBox} $intType,
   ${NoteFields.time} $textType
   )
 ''');
@@ -43,7 +44,6 @@ CREATE TABLE $notesTableName (
     ${ContentFields.contentId} $idType,
     ${ContentFields.contentNoteId} $intType,
     ${ContentFields.noteText} $textType,
-    ${ContentFields.checkBox} $intType,
     ${ContentFields.isDone} $intType,
     FOREIGN KEY(${ContentFields.contentNoteId}) REFERENCES $notesTableName(${NoteFields.noteId})
     )

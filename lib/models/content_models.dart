@@ -6,7 +6,6 @@ class ContentFields {
     contentId,
     contentNoteId,
     noteText,
-    checkBox,
     isDone,
   ];
 
@@ -19,9 +18,6 @@ class ContentFields {
   /// "noteText" Column in "contents" Table.
   static const noteText = 'noteText';
 
-  /// "checkBox" Column in "contents" Table.
-  static const checkBox = 'checked';
-
   /// "isDone" Column in "contents" Table.
   static const isDone = 'isDone';
 }
@@ -31,14 +27,12 @@ class Content {
   int? contentId;
   int? contentNoteId;
   String noteText;
-  bool? checkBox;
   bool? isDone;
 
   Content({
     this.contentId,
     this.contentNoteId,
     this.noteText = '',
-    this.checkBox,
     this.isDone,
   });
 
@@ -46,14 +40,12 @@ class Content {
     int? contentId,
     int? contentNoteId,
     String? noteText,
-    bool? checkBox,
     bool? isDone,
   }) {
     return Content(
       contentId: contentId ?? this.contentId,
       contentNoteId: contentNoteId ?? this.contentNoteId,
       noteText: noteText ?? this.noteText,
-      checkBox: checkBox ?? this.checkBox,
       isDone: isDone ?? this.isDone,
     );
   }
@@ -63,7 +55,6 @@ class Content {
       contentId: json[ContentFields.contentId] as int?,
       contentNoteId: json[ContentFields.contentNoteId] as int?,
       noteText: json[ContentFields.noteText] as String,
-      checkBox: json[ContentFields.checkBox] == 1,
       isDone: json[ContentFields.isDone] == 1,
     );
   }
@@ -72,7 +63,6 @@ class Content {
         ContentFields.contentId: contentId,
         ContentFields.contentNoteId: contentNoteId,
         ContentFields.noteText: noteText,
-        ContentFields.checkBox: checkBox == true ? 1 : 0,
         ContentFields.isDone: isDone == true ? 1 : 0,
       };
 }
