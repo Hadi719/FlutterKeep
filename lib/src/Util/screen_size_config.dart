@@ -18,7 +18,7 @@ class ScreenSizeConfig {
   static late double _safeAreaHorizontal;
   static late double _safeAreaVertical;
 
-  /// Device Screen Size Percentage with SafeArea.
+  /// Device Screen Size Percentage within SafeArea.
   ///
   /// by Flutter MediaQuery class.
   static late double safeBlockHorizontal;

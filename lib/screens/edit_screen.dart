@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/models/contents_data.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
 import '../models/content_models.dart';
+import '../models/contents_data.dart';
 import '../models/note_model.dart';
 import '../screens/home_screen.dart';
 import '../widgets/content_build_widget.dart';
@@ -93,6 +93,9 @@ class _EditScreenState extends State<EditScreen> {
                                   contentsData.updateContent(index, content);
                                 });
                               },
+                              onFieldSubmitted: (String value) {
+                                contentsData.addContent('', false);
+                              },
                             );
                           },
                         ),
@@ -135,7 +138,7 @@ class _EditScreenState extends State<EditScreen> {
           if (isFormValid) {
             await addOrUpdateNote();
             await addAllContents();
-            Navigator.pop(context);
+            Navigator.popAndPushNamed(context, HomeScreen.routeName);
           }
         },
       ),

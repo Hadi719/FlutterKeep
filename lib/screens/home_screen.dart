@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/widgets/note_card_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
@@ -7,6 +6,7 @@ import '../models/content_models.dart';
 import '../models/note_model.dart';
 import '../screens/edit_screen.dart';
 import '../src/Util/screen_size_config.dart';
+import '../widgets/note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
