@@ -18,9 +18,9 @@ class NotesDatabase {
     return _database!;
   }
 
-  Future<Database> _initDatabase(String filepath) async {
+  Future<Database> _initDatabase(String databaseName) async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filepath);
+    final path = join(dbPath, databaseName);
 
     return await openDatabase(path,
         version: 1, onCreate: _createDB, onConfigure: _onConfigure);
