@@ -37,7 +37,7 @@ class _EditScreenState extends State<EditScreen> {
         : Scaffold(
             appBar: AppBar(
               actions: [
-                buildAddButton(),
+                buildCheckBox(),
                 buildSaveButton(),
                 deleteButton(),
               ],
@@ -142,12 +142,12 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  Widget buildAddButton() {
+  Widget buildCheckBox() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: IconButton(
         icon: const Icon(Icons.add),
-        tooltip: 'Add New Content',
+        tooltip: 'CheckBox',
         onPressed: () {
           // Provider.of<ContentsData>(context, listen: false).addContent('');
           setState(() {
