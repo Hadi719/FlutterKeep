@@ -138,7 +138,7 @@ class _EditScreenState extends State<EditScreen> {
           if (isFormValid) {
             await addOrUpdateNote();
             await addAllContents();
-            Navigator.popAndPushNamed(context, HomeScreen.routeName);
+            Navigator.pop(context);
           }
         },
       ),

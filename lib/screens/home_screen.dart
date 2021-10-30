@@ -74,12 +74,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                       return GestureDetector(
                         onTap: () async {
-                          await Navigator.of(context).push(
+                          await Navigator.of(context)
+                              .push(
                             MaterialPageRoute(
                               builder: (context) =>
                                   EditScreen(noteId: note.noteId!),
                             ),
-                          );
+                          )
+                              .then((value) {
+                            setState(() {
+                              refreshNotes();
+                            });
+                          });
                         },
                         child: NoteCardWidget(
                           note: note,
@@ -95,7 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () async {
-                await Navigator.pushNamed(context, EditScreen.routeName);
+                await Navigator.pushNamed(context, EditScreen.routeName)
+                    .then((value) {
+                  setState(() {
+                    refreshNotes();
+                  });
+                });
               },
             ),
           );
