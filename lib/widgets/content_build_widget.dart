@@ -33,6 +33,7 @@ class ContentBuildWidget extends StatelessWidget {
           initialValue: noteText,
           maxLines: 1,
           textInputAction: TextInputAction.go,
+          autofocus: true,
           style: TextStyle(
             fontSize: 18,
             decoration: isDone! ? TextDecoration.lineThrough : null,
@@ -57,6 +58,7 @@ class ContentBuildWidget extends StatelessWidget {
         initialValue: noteText,
         maxLines: null,
         keyboardType: TextInputType.multiline,
+        autofocus: true,
         style: const TextStyle(
           fontSize: 18,
         ),
