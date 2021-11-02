@@ -88,6 +88,7 @@ class _EditScreenState extends State<EditScreen> {
                                 noteText: content.noteText,
                                 isCheckBox: isCheckBox,
                                 isDone: content.isDone,
+                                autofocus: true,
                                 onChangeCheckBox: (bool? newValue) {
                                   content.isDone = newValue;
                                   contentsData.updateContent(index, content);
