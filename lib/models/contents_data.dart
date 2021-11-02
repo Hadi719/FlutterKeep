@@ -4,8 +4,12 @@ import '../models/content_models.dart';
 
 class ContentsData extends ChangeNotifier {
   final List<Content> _contentList = [];
+  final List<Content> _trueContentsList = [];
+  final List<Content> _falseContentsList = [];
 
   List<Content> get getContentList => _contentList;
+  List<Content> get getTrueContentList => _trueContentsList;
+  List<Content> get getFalseContentList => _falseContentsList;
 
   int get getContentsListLength => _contentList.length;
 
@@ -26,6 +30,11 @@ class ContentsData extends ChangeNotifier {
       isDone: isDone,
     );
     _contentList.add(content);
+    if (isDone!) {
+      _trueContentsList.add(content);
+    } else {
+      _falseContentsList.add(content);
+    }
     notifyListeners();
   }
 }

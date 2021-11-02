@@ -82,16 +82,14 @@ class _EditScreenState extends State<EditScreen> {
                               isCheckBox: isCheckBox,
                               isDone: content.isDone,
                               onChangeCheckBox: (bool? newValue) {
-                                setState(() {
-                                  content.isDone = newValue;
-                                  contentsData.updateContent(index, content);
-                                });
+                                content.isDone = newValue;
+                                contentsData.updateContent(index, content);
                               },
                               onChangedContent: (newNoteText) {
-                                return setState(() {
-                                  content.noteText = newNoteText;
-                                  contentsData.updateContent(index, content);
-                                });
+                                return {
+                                  content.noteText = newNoteText,
+                                  contentsData.updateContent(index, content),
+                                };
                               },
                               onFieldSubmitted: (String value) {
                                 contentsData.addContent('', false);

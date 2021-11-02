@@ -25,14 +25,15 @@ class ContentBuildWidget extends StatelessWidget {
     ScreenSizeConfig().init(context);
     if (isCheckBox) {
       return ListTile(
-        leading: Icon(
-          Icons.list,
-          size: ScreenSizeConfig.safeBlockHorizontal * 7,
+        leading: Checkbox(
+          activeColor: Colors.lightBlueAccent,
+          value: isDone,
+          onChanged: onChangeCheckBox,
         ),
         title: TextFormField(
           initialValue: noteText,
           maxLines: 1,
-          textInputAction: TextInputAction.go,
+          textInputAction: TextInputAction.next,
           autofocus: true,
           style: TextStyle(
             fontSize: 18,
@@ -45,13 +46,6 @@ class ContentBuildWidget extends StatelessWidget {
           onChanged: onChangedContent,
           onFieldSubmitted: onFieldSubmitted,
         ),
-        trailing: Checkbox(
-          activeColor: Colors.lightBlueAccent,
-          value: isDone,
-          onChanged: onChangeCheckBox,
-        ),
-        // onTap: onTapCallback,
-        // onLongPress: longPressCallback,
       );
     } else {
       return TextFormField(
