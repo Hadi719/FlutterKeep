@@ -35,7 +35,7 @@ class ContentBuildWidget extends StatelessWidget {
         title: TextFormField(
           initialValue: noteText,
           maxLines: 1,
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
           autofocus: true,
           style: TextStyle(
             fontSize: 18,
