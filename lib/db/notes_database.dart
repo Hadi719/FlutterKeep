@@ -102,8 +102,6 @@ CREATE TABLE $notesTableName (
     if (result.isNotEmpty) {
       List<Content> ourContents =
           result.map((json) => Content.fromJson(json)).toList();
-      print(
-          'db.readContent: Text[0]: ${ourContents[0].noteText} isDone: ${ourContents[0].isDone}');
       return ourContents;
     } else {
       throw Exception('Contents with Note ID $contentNoteId not found');
