@@ -1,30 +1,42 @@
 # flutter_note
 
-A new Flutter project.
+A Flutter Note & Todo App.
 
-## Getting Started
+## My task list for this app.
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
+- [x] SQFLite Database : Two tables (Note & Content) with foreign key
+- [x] Note & Content Models
+- [x] Starter Screen : Animated
+- [x] Home & Edit Screen
+- [x] Provider State Managment
+- [x] Dark Theme
+- [x] Routes Navigation
+- [x] Note Card Widget
+- [x] Content Build & View Widget
+- [x] Device Size Config
+- [x] SliverAppBar
+- [x] Grid View
+- [x] BottomAppBar with notch FAB
+- [x] Checkbox
+- [ ] About Screen
+- [ ] Settings Screen
+- [ ] Search Screen
+- [ ] Drawer
+- [ ] List View
+- [ ] Time
+- [ ] Light Theme
+- [ ] Localization
+- [ ] Reminder
+- [ ] Labels
+- [ ] Archive
+- [ ] Help & Feedback
+- [ ] Sorting
+- [ ] Share
+- [ ] Toast / SnackBar
+- [ ] Constants
+- [ ] User Settings
+- [ ] Color Picker
+- [ ] Background Image Picker
+- [ ] Theme Picker
+- [ ] Font Family & Size Picker
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## Assets
-
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
-
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
-
-## Localization
-
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
-
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
