@@ -8,11 +8,11 @@ import '../src/Util/screen_size_config.dart';
 
 final _lightColors = [
   Colors.deepPurple,
-  Colors.green,
+  Colors.indigo,
   Colors.lightBlue,
-  Colors.orange,
-  Colors.pinkAccent,
-  Colors.tealAccent
+  Colors.teal,
+  Colors.deepOrange,
+  Colors.blueGrey
 ];
 
 class NoteCardWidget extends StatelessWidget {
@@ -44,7 +44,7 @@ class NoteCardWidget extends StatelessWidget {
       child: Container(
         width: ScreenSizeConfig.safeBlockHorizontal * 45,
         // constraints: BoxConstraints(minHeight: minHeight),
-        padding: const EdgeInsets.fromLTRB(20, 20, 8, 8),
+        padding: const EdgeInsets.fromLTRB(20, 20, 8, 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
