@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 FloatingActionButtonLocation.endDocked,
             bottomNavigationBar: BottomAppBar(
               shape: const CircularNotchedRectangle(),
-              color: Colors.grey.shade800,
+              color: Theme.of(context).appBarTheme.backgroundColor,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 64, 16),
                 height: ScreenSizeConfig.safeBlockVertical * 8,
