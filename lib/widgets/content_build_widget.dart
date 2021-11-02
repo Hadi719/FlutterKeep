@@ -6,6 +6,7 @@ class ContentBuildWidget extends StatelessWidget {
   final String? noteText;
   final bool isCheckBox;
   final bool? isDone;
+  final bool autofocus;
   final Function(String)? onChangedContent;
   final ValueChanged<bool?> onChangeCheckBox;
   final Function(String)? onFieldSubmitted;
@@ -15,6 +16,7 @@ class ContentBuildWidget extends StatelessWidget {
     this.noteText,
     required this.isCheckBox,
     this.isDone,
+    this.autofocus = false,
     required this.onChangedContent,
     required this.onChangeCheckBox,
     required this.onFieldSubmitted,
