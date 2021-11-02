@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<Content> allContents;
   bool isLoading = false;
 
-  /// SliverAppBar Settings
+  // SliverAppBar Settings
   final bool _pinned = false;
   final bool _snap = false;
   final bool _floating = true;
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     ScreenSizeConfig().init(context);
     // Loading the Notes.
+
     return isLoading
         ? loadingIndicator()
         : Scaffold(
@@ -50,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       leading: IconButton(
+                        highlightColor: Colors.transparent,
                         icon: const Icon(
                           Icons.menu,
                         ),
@@ -99,7 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.add),
+              backgroundColor: Colors.grey.shade800,
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
               onPressed: () async {
                 await Navigator.pushNamed(context, EditScreen.routeName)
                     .then((value) {
@@ -108,6 +115,48 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 });
               },
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.endDocked,
+            bottomNavigationBar: BottomAppBar(
+              shape: const CircularNotchedRectangle(),
+              color: Colors.grey.shade800,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 64, 16),
+                height: ScreenSizeConfig.safeBlockVertical * 8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      tooltip: 'Home',
+                      highlightColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.home_outlined,
+                        size: ScreenSizeConfig.safeBlockHorizontal * 7,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      tooltip: 'Search',
+                      highlightColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.search_outlined,
+                        size: ScreenSizeConfig.safeBlockHorizontal * 7,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      tooltip: 'About App',
+                      highlightColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.info_outline,
+                        size: ScreenSizeConfig.safeBlockHorizontal * 7,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
   }
