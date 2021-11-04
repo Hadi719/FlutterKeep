@@ -8,7 +8,7 @@ A Flutter Note & Todo App.
 - [x] Note & Content Models
 - [x] Starter Screen : Animated
 - [x] Home & Edit Screen
-- [x] Provider State Managment
+- [x] Provider State Management
 - [x] Dark Theme
 - [x] Routes Navigation
 - [x] Note Card Widget
