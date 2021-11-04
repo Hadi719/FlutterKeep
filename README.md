@@ -13,7 +13,7 @@ A Flutter Note & Todo App.
 - [x] Routes Navigation
 - [x] Note Card Widget
 - [x] Content Build & View Widget
-- [x] Device Size Config
+- [x] Device Size Config : Adaptive
 - [x] SliverAppBar
 - [x] Grid View
 - [x] BottomAppBar with notch FAB
