@@ -3,11 +3,11 @@ import 'package:flutter_note/src/Util/screen_size_config.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
-import '../models/content_models.dart';
-import '../models/contents_data.dart';
-import '../models/note_model.dart';
+import '../src/models/content_models.dart';
+import '../src/models/contents_data.dart';
+import '../src/models/note_model.dart';
 import '../screens/home_screen.dart';
-import '../widgets/content_build_widget.dart';
+import '../src/widgets/content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
   static const String routeName = 'edit_screen';

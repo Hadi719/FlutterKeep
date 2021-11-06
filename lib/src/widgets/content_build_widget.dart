@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../src/Util/screen_size_config.dart';
+import 'package:flutter_note/src/util/screen_size_config.dart';
 
 class ContentBuildWidget extends StatelessWidget {
   final String? noteText;

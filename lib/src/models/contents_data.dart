@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/content_models.dart';
+import 'content_models.dart';
 
 class ContentsData extends ChangeNotifier {
   final List<Content> _contentList = [];

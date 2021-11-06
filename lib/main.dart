@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_note/screens/edit_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../models/contents_data.dart';
+import 'package:flutter_note/src/models/contents_data.dart';
 import '../screens/home_screen.dart';
 import '../screens/starter/starter_screen.dart';
 
