@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_note/screens/about_screen.dart';
 import 'package:flutter_note/screens/edit_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         StarterScreen.routeName: (context) => const StarterScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         EditScreen.routeName: (context) => const EditScreen(),
+        AboutScreen.routeName: (context) => const AboutScreen(),
       },
     );
   }

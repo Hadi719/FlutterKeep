@@ -29,16 +29,16 @@ class BackgroundImageWidget extends StatelessWidget {
           image: image,
           fit: BoxFit.fitWidth,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.2),
+            Colors.grey.withOpacity(0.5),
             BlendMode.dstATop,
           ),
         ),
       ),
-      child: child,
     );
   }
 }
 
+/// Shader for background image.
 // ShaderMask(
 // blendMode: BlendMode.darken,
 // shaderCallback: (Rect bounds) {
