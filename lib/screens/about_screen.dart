@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/src/util/constants.dart';
 import 'package:flutter_note/src/util/screen_size_config.dart';
+import 'package:flutter_note/src/widgets/build_bottom_navigation_bar_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -108,6 +109,9 @@ class AboutScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: const BuildBottomNavigationBarWidget(
+        routeName: AboutScreen.routeName,
       ),
     );
   }

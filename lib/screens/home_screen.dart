@@ -102,6 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.grey.shade800,
               child: const Icon(
@@ -117,9 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.endDocked,
-            bottomNavigationBar: BuildBottomNavigationBarWidget(),
+            bottomNavigationBar: const BuildBottomNavigationBarWidget(
+              routeName: HomeScreen.routeName,
+            ),
           );
   }
 
