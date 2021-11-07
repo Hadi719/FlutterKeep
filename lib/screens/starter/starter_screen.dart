@@ -86,7 +86,7 @@ class _StarterScreenState extends State<StarterScreen>
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
-                  'MY NOTE',
+                  'Flutter Keep',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
