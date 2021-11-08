@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
-  static const String routeName = 'about_screen';
+  static const String routeName = '/about';
 
   @override
   Widget build(BuildContext context) {

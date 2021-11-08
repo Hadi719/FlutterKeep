@@ -10,7 +10,7 @@ import '../screens/home_screen.dart';
 import '../src/widgets/my_content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
-  static const String routeName = 'edit_screen';
+  static const String routeName = '/edit';
   final int? noteId;
 
   const EditScreen({

@@ -7,7 +7,7 @@ import '../starter/screen_transition.dart';
 
 class StarterScreen extends StatefulWidget {
   const StarterScreen({Key? key}) : super(key: key);
-  static const String routeName = 'starter_screen';
+  static const String routeName = '/starter';
 
   @override
   _StarterScreenState createState() => _StarterScreenState();

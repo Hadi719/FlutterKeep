@@ -13,7 +13,7 @@ import '../src/widgets/my_note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static const String routeName = 'home_screen';
+  static const String routeName = '/home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
