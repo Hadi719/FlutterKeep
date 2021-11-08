@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_note/src/widgets/build_bottom_navigation_bar_widget.dart';
+import 'package:flutter_note/src/widgets/my_drawer_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
@@ -31,12 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenSizeConfig().init(context);
-    GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return isLoading
         ? loadingIndicator()
         : Scaffold(
-            key: _scaffoldKey,
             body: SafeArea(
               child: CustomScrollView(
                 slivers: [
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            drawer: Drawer(),
+            drawer: MyDrawer(routeName: HomeScreen.routeName),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
