@@ -18,7 +18,7 @@ A Flutter Note & Todo App.
 - [x] Grid View
 - [x] BottomAppBar with notch FAB
 - [x] Checkbox
-- [ ] About Screen
+- [x] About Screen
 - [ ] Settings Screen
 - [ ] Search Screen
 - [ ] Drawer
