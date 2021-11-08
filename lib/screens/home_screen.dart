@@ -31,11 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenSizeConfig().init(context);
-    // Loading the Notes.
+    GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return isLoading
         ? loadingIndicator()
         : Scaffold(
+            key: _scaffoldKey,
             body: SafeArea(
               child: CustomScrollView(
                 slivers: [
@@ -52,14 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Radius.circular(30.0),
                         ),
                       ),
-                      leading: IconButton(
-                        highlightColor: Colors.transparent,
-                        icon: const Icon(
-                          Icons.menu,
-                        ),
-                        iconSize: ScreenSizeConfig.safeBlockHorizontal * 7,
-                        onPressed: () {},
-                      ),
+                      leading: const MyAppBarLeadingIcon(),
                     ),
                   ),
                   SliverStaggeredGrid.countBuilder(
@@ -102,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            drawer: Drawer(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
@@ -155,6 +150,27 @@ class _HomeScreenState extends State<HomeScreen> {
     refreshNotes();
     return const Center(
       child: CircularProgressIndicator(),
+    );
+  }
+}
+
+class MyAppBarLeadingIcon extends StatelessWidget {
+  const MyAppBarLeadingIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      splashRadius: 20,
+      highlightColor: Colors.transparent,
+      icon: const Icon(
+        Icons.menu,
+      ),
+      iconSize: ScreenSizeConfig.safeBlockHorizontal * 7,
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
     );
   }
 }
