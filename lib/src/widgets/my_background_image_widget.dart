@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BackgroundImageWidget extends StatelessWidget {
+class MyBackgroundImage extends StatelessWidget {
   final ImageProvider image;
   final Widget child;
 
-  const BackgroundImageWidget({
+  const MyBackgroundImage({
     Key? key,
     required this.image,
     required this.child,

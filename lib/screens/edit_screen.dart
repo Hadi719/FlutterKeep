@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/Util/screen_size_config.dart';
+import 'package:flutter_note/src/Util/my_screen_size.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
@@ -7,7 +7,7 @@ import '../src/models/content_models.dart';
 import '../src/models/contents_data.dart';
 import '../src/models/note_model.dart';
 import '../screens/home_screen.dart';
-import '../src/widgets/content_build_widget.dart';
+import '../src/widgets/my_content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
   static const String routeName = 'edit_screen';
@@ -84,7 +84,7 @@ class _EditScreenState extends State<EditScreen> {
                             itemCount: contentsData.getContentsListLength,
                             itemBuilder: (context, index) {
                               Content content = contentsList![index];
-                              return ContentBuildWidget(
+                              return MyContentBuild(
                                 noteText: content.noteText,
                                 isCheckBox: isCheckBox,
                                 isDone: content.isDone,

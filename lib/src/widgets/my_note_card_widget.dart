@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_note/src/models/content_models.dart';
-import 'package:flutter_note/src/widgets/content_view_widget.dart';
+import 'package:flutter_note/src/widgets/my_content_view_widget.dart';
 
 import '../models/note_model.dart';
-import 'package:flutter_note/src/util/screen_size_config.dart';
+import 'package:flutter_note/src/util/my_screen_size.dart';
 
 final _lightColors = [
   Colors.deepPurple,
@@ -15,8 +15,8 @@ final _lightColors = [
   Colors.blueGrey
 ];
 
-class NoteCardWidget extends StatelessWidget {
-  const NoteCardWidget({
+class MyNoteCard extends StatelessWidget {
+  const MyNoteCard({
     Key? key,
     required this.note,
     required this.index,
@@ -33,7 +33,7 @@ class NoteCardWidget extends StatelessWidget {
     final color = _lightColors[index % _lightColors.length];
     // final timeDate = DateFormat('d MMM, y').format(note.createdTime);
     // final timeHour = DateFormat('HH : mm').format(note.createdTime);
-    ScreenSizeConfig().init(context);
+    MyScreenSize().init(context);
     return Card(
       color: color,
       shape: const RoundedRectangleBorder(
@@ -42,7 +42,7 @@ class NoteCardWidget extends StatelessWidget {
         ),
       ),
       child: Container(
-        width: ScreenSizeConfig.safeBlockHorizontal * 45,
+        width: MyScreenSize.safeBlockHorizontal * 45,
         // constraints: BoxConstraints(minHeight: minHeight),
         padding: const EdgeInsets.fromLTRB(20, 20, 8, 20),
         child: Column(
@@ -58,7 +58,7 @@ class NoteCardWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10.0),
-            ContentViewWidget(contentsList: contentsList)
+            MyContentView(contentsList: contentsList)
           ],
         ),
       ),

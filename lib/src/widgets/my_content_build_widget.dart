@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/util/screen_size_config.dart';
+import 'package:flutter_note/src/util/my_screen_size.dart';
 
-class ContentBuildWidget extends StatelessWidget {
+class MyContentBuild extends StatelessWidget {
   final String? noteText;
   final bool isCheckBox;
   final bool? isDone;
@@ -10,7 +10,7 @@ class ContentBuildWidget extends StatelessWidget {
   final ValueChanged<bool?> onChangeCheckBox;
   final Function(String)? onFieldSubmitted;
 
-  const ContentBuildWidget({
+  const MyContentBuild({
     Key? key,
     this.noteText,
     required this.isCheckBox,
@@ -23,7 +23,7 @@ class ContentBuildWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSizeConfig().init(context);
+    MyScreenSize().init(context);
     if (isCheckBox) {
       return ListTile(
         leading: Checkbox(

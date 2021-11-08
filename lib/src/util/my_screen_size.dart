@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class ScreenSizeConfig {
+class MyScreenSize {
   static late MediaQueryData _mediaQueryData;
 
   /// Device Screen Size.

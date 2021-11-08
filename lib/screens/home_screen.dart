@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_note/src/widgets/build_bottom_navigation_bar_widget.dart';
+import 'package:flutter_note/src/widgets/my_bottom_nav_bar_widget.dart';
 import 'package:flutter_note/src/widgets/my_drawer_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -8,8 +8,8 @@ import '../db/notes_database.dart';
 import '../src/models/content_models.dart';
 import '../src/models/note_model.dart';
 import '../screens/edit_screen.dart';
-import '../src/Util/screen_size_config.dart';
-import '../src/widgets/note_card_widget.dart';
+import '../src/Util/my_screen_size.dart';
+import '../src/widgets/my_note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           });
                         },
-                        child: NoteCardWidget(
+                        child: MyNoteCard(
                           note: note,
                           index: index,
                           contentsList: contentsList,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
             ),
-            bottomNavigationBar: const BuildBottomNavigationBarWidget(
+            bottomNavigationBar: const MyBottomNavBar(
               routeName: HomeScreen.routeName,
             ),
           );

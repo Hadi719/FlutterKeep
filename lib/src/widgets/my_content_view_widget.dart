@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../models/content_models.dart';
 
-class ContentViewWidget extends StatelessWidget {
+class MyContentView extends StatelessWidget {
   final List<Content> contentsList;
 
-  const ContentViewWidget({
+  const MyContentView({
     Key? key,
     required this.contentsList,
   }) : super(key: key);

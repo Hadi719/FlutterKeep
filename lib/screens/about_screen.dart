@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/util/constants.dart';
-import 'package:flutter_note/src/util/screen_size_config.dart';
-import 'package:flutter_note/src/widgets/build_bottom_navigation_bar_widget.dart';
+import 'package:flutter_note/src/util/my_constants.dart';
+import 'package:flutter_note/src/util/my_screen_size.dart';
+import 'package:flutter_note/src/widgets/my_bottom_nav_bar_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,21 +12,21 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSizeConfig().init(context);
+    MyScreenSize().init(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              16, ScreenSizeConfig.safeBlockVertical * 5, 16, 16),
+              16, MyScreenSize.safeBlockVertical * 5, 16, 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: ScreenSizeConfig.safeBlockHorizontal * 15,
+                radius: MyScreenSize.safeBlockHorizontal * 15,
                 child: FlutterLogo(
-                  size: ScreenSizeConfig.safeBlockHorizontal * 15,
+                  size: MyScreenSize.safeBlockHorizontal * 15,
                 ),
               ),
               const Text(
@@ -110,7 +110,7 @@ class AboutScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BuildBottomNavigationBarWidget(
+      bottomNavigationBar: const MyBottomNavBar(
         routeName: AboutScreen.routeName,
       ),
     );
