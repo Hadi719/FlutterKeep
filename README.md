@@ -7,7 +7,9 @@ A Flutter Note & Todo App.
 - [x] SQFLite Database : Two tables (Note & Content) with foreign key
 - [x] Note & Content Models
 - [x] Starter Screen : Animated
-- [x] Home & Edit Screen
+- [x] Home Screen
+- [x] Edit Screen
+- [x] About Screen
 - [x] Provider State Management
 - [x] Dark Theme
 - [x] Routes Navigation
@@ -15,13 +17,12 @@ A Flutter Note & Todo App.
 - [x] Content Build & View Widget
 - [x] Device Size Config : Adaptive
 - [x] SliverAppBar
-- [x] Grid View
 - [x] BottomAppBar with notch FAB
+- [x] Drawer
+- [x] Grid View
 - [x] Checkbox
-- [x] About Screen
 - [ ] Settings Screen
 - [ ] Search Screen
-- [ ] Drawer
 - [ ] List View
 - [ ] Time
 - [ ] Light Theme
