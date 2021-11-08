@@ -75,7 +75,7 @@ class MyDrawer extends StatelessWidget {
                         bottomRight: Radius.circular(40),
                       ),
                     ),
-                    leading: const Icon(Icons.lightbulb_outline),
+                    leading: const Icon(Icons.settings),
                     title: const Text('Settings'),
                     onTap: routeName != 'SettingsScreen.routeName'
                         ? () {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_note/src/widgets/my_bottom_nav_bar_widget.dart';
-import 'package:flutter_note/src/widgets/my_drawer_widget.dart';
+import 'package:flutter_note/src/util/my_screen_size.dart';
+import '../src/widgets/my_bottom_nav_bar_widget.dart';
+import '../src/widgets/my_drawer_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../db/notes_database.dart';
 import '../src/models/content_models.dart';
 import '../src/models/note_model.dart';
 import '../screens/edit_screen.dart';
-import '../src/Util/my_screen_size.dart';
 import '../src/widgets/my_note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSizeConfig().init(context);
+    MyScreenSize().init(context);
 
     return isLoading
         ? loadingIndicator()
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       pinned: _pinned,
                       snap: _snap,
                       floating: _floating,
-                      toolbarHeight: ScreenSizeConfig.safeBlockVertical * 7,
+                      toolbarHeight: MyScreenSize.safeBlockVertical * 7,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(30.0),
@@ -166,7 +166,7 @@ class MyAppBarLeadingIcon extends StatelessWidget {
       icon: const Icon(
         Icons.menu,
       ),
-      iconSize: ScreenSizeConfig.safeBlockHorizontal * 7,
+      iconSize: MyScreenSize.safeBlockHorizontal * 7,
       onPressed: () {
         Scaffold.of(context).openDrawer();
       },

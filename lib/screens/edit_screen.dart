@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/Util/my_screen_size.dart';
+import 'package:flutter_note/src/util/my_screen_size.dart';
 import 'package:provider/provider.dart';
 
 import '../db/notes_database.dart';
@@ -33,7 +33,7 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSizeConfig().init(context);
+    MyScreenSize().init(context);
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : Scaffold(
@@ -123,7 +123,7 @@ class _EditScreenState extends State<EditScreen> {
                   MediaQuery.of(context).viewInsets.bottom + 16.0,
                 ),
                 height: MediaQuery.of(context).viewInsets.bottom +
-                    ScreenSizeConfig.safeBlockVertical * 8,
+                    MyScreenSize.safeBlockVertical * 8,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
