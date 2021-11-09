@@ -154,7 +154,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   Widget buildSaveButton() {
-    final isFormValid = title.isNotEmpty && contentsList![0].noteText != '';
+    final isFormValid = title.isNotEmpty; //&& contentsList![0].noteText != ''
 
     return IconButton(
       highlightColor: Colors.transparent,
