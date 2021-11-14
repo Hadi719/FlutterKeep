@@ -73,7 +73,7 @@ class _StarterScreenState extends State<StarterScreen>
     double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: const Color(0xff15182e),
       body: Stack(
         children: [
           Column(
@@ -107,14 +107,12 @@ class _StarterScreenState extends State<StarterScreen>
                 height: _width / _containerSize,
                 width: _width / _containerSize,
                 alignment: Alignment.center,
-                child: const FlutterLogo(
-                  size: 80,
+                child: const Image(
+                  color: Colors.green,
+                  width: 100,
+                  height: 100,
+                  image: AssetImage('assets/logo.png'),
                 ),
-                // Icon(
-                //   Icons.android,
-                //   color: Colors.green,
-                //   size: 80,
-                // ),
               ),
             ),
           ),
