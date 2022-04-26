@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/util/my_constants.dart';
-import 'package:flutter_note/src/util/my_screen_size.dart';
-import 'package:flutter_note/src/widgets/my_bottom_nav_bar_widget.dart';
+import 'package:flutter_keep/src/util/my_constants.dart';
+import 'package:flutter_keep/src/util/my_screen_size.dart';
+import 'package:flutter_keep/src/widgets/my_bottom_nav_bar_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 

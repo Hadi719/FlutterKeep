@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_note/src/util/my_screen_size.dart';
-import '../src/widgets/my_bottom_nav_bar_widget.dart';
-import '../src/widgets/my_drawer_widget.dart';
+import 'package:flutter_keep/db/notes_database.dart';
+import 'package:flutter_keep/screens/edit_screen.dart';
+import 'package:flutter_keep/src/models/content_models.dart';
+import 'package:flutter_keep/src/models/note_model.dart';
+import 'package:flutter_keep/src/util/my_screen_size.dart';
+import 'package:flutter_keep/src/widgets/my_bottom_nav_bar_widget.dart';
+import 'package:flutter_keep/src/widgets/my_drawer_widget.dart';
+import 'package:flutter_keep/src/widgets/my_note_card_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-import '../db/notes_database.dart';
-import '../src/models/content_models.dart';
-import '../src/models/note_model.dart';
-import '../screens/edit_screen.dart';
-import '../src/widgets/my_note_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,7 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 slivers: [
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 8.0),
+                      vertical: 8.0,
+                      horizontal: 8.0,
+                    ),
                     sliver: SliverAppBar(
                       pinned: _pinned,
                       snap: _snap,
@@ -55,12 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       leading: const MyAppBarLeadingIcon(),
                     ),
                   ),
-                  SliverStaggeredGrid.countBuilder(
-                    itemCount: notes.length,
-                    crossAxisCount: 4,
+                  SliverMasonryGrid.count(
+                    childCount: notes.length,
+                    crossAxisCount: 2,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
-                    staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
                     itemBuilder: (context, index) {
                       final note = notes[index];
                       List<Content> contentsList = [];
@@ -91,11 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                  ),
+                  )
                 ],
               ),
             ),
-            drawer: MyDrawer(routeName: HomeScreen.routeName),
+            drawer: const MyDrawer(routeName: HomeScreen.routeName),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(

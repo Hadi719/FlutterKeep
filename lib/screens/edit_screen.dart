@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/util/my_screen_size.dart';
+import 'package:flutter_keep/db/notes_database.dart';
+import 'package:flutter_keep/screens/home_screen.dart';
+import 'package:flutter_keep/src/models/content_models.dart';
+import 'package:flutter_keep/src/models/contents_data.dart';
+import 'package:flutter_keep/src/models/note_model.dart';
+import 'package:flutter_keep/src/util/my_screen_size.dart';
+import 'package:flutter_keep/src/widgets/my_content_build_widget.dart';
 import 'package:provider/provider.dart';
-
-import '../db/notes_database.dart';
-import '../src/models/content_models.dart';
-import '../src/models/contents_data.dart';
-import '../src/models/note_model.dart';
-import '../screens/home_screen.dart';
-import '../src/widgets/my_content_build_widget.dart';
 
 class EditScreen extends StatefulWidget {
   static const String routeName = '/edit';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/screens/about_screen.dart';
-import 'package:flutter_note/screens/home_screen.dart';
+import 'package:flutter_keep/screens/about_screen.dart';
+import 'package:flutter_keep/screens/home_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({

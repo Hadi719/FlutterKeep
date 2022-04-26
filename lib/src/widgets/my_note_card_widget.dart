@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_note/src/models/content_models.dart';
-import 'package:flutter_note/src/widgets/my_content_view_widget.dart';
+import 'package:flutter_keep/src/models/content_models.dart';
+import 'package:flutter_keep/src/widgets/my_content_view_widget.dart';
 
 import '../models/note_model.dart';
-import 'package:flutter_note/src/util/my_screen_size.dart';
+import 'package:flutter_keep/src/util/my_screen_size.dart';
 
 final _lightColors = [
   Colors.deepPurple,

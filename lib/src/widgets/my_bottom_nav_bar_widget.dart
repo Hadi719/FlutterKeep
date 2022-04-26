@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/screens/about_screen.dart';
-import 'package:flutter_note/screens/home_screen.dart';
-import 'package:flutter_note/src/util/my_screen_size.dart';
+import 'package:flutter_keep/screens/about_screen.dart';
+import 'package:flutter_keep/screens/home_screen.dart';
+import 'package:flutter_keep/src/util/my_screen_size.dart';
 
 class MyBottomNavBar extends StatelessWidget {
   const MyBottomNavBar({

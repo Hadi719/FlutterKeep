@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/screens/about_screen.dart';
-import 'package:flutter_note/screens/edit_screen.dart';
+import 'package:flutter_keep/screens/about_screen.dart';
+import 'package:flutter_keep/screens/edit_screen.dart';
+import 'package:flutter_keep/screens/home_screen.dart';
+import 'package:flutter_keep/screens/starter/starter_screen.dart';
+import 'package:flutter_keep/src/models/contents_data.dart';
 import 'package:provider/provider.dart';
-
-import 'package:flutter_note/src/models/contents_data.dart';
-import '../screens/home_screen.dart';
-import '../screens/starter/starter_screen.dart';
 
 void main() {
   return runApp(
